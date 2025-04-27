@@ -1,3 +1,44 @@
+# CS 548 Final Project - MultiNeRF360 Exploration
+
+This repository is a fork of (https://github.com/google-research/multinerf), created for a CS 548 class project at SUNY Polytechnic Institute.
+
+Team Members:
+- Taylor Hunter
+- Kelly Powell
+- Zachary Smith
+
+---
+
+## 📚 Project Overview
+
+Our project explores and extends the MultiNeRF360 system for 360-degree scene reconstruction.  
+We focus on training and evaluating the model on new datasets, performing reproducibility experiments, and analyzing performance.
+
+This repository contains all code modifications, training configurations, and instructions required to reproduce our experiments.
+
+---
+
+## 🛠 Modifications to Original Repository
+
+- **Bug fix**: Corrected an `OverflowError` in `internal/pycolmap/scene_manager.py` by adjusting `INVALID_POINT3D = np.uint64(2**64 - 1)` to avoid assigning `-1` to an unsigned integer.
+- **Dataset adaptation**: Extended usage to new scenes (`treehill`, `flowers`) from the **Dataset pt1.** and **Dataset pt2.** datasets.
+- **Environment setup documentation**: Added detailed setup instructions to ensure compatibility with Python 3.9 and specific library versions.
+
+---
+
+## 📂 Dataset Used
+We used the following scenes from the **Dataset pt1.** dataset:
+- 'bike and bench'
+
+We used the following scenes from the **Dataset pt2.** dataset:
+- `treehill`
+- `flowers`
+
+**Dataset Download Instructions:**
+- Download the Dataset pt1. dataset from (https://jonbarron.info/mipnerf360/)].
+- Download the Dataset pt2. dataset from (https://jonbarron.info/mipnerf360/)].  
+
+
 # MultiNeRF: A Code Release for Mip-NeRF 360, Ref-NeRF, and RawNeRF
 
 *This is not an officially supported Google product.*

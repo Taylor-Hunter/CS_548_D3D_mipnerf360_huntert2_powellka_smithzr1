@@ -6,3 +6,27 @@ tests/__pycache__/
 .vscode/
 .idea/
 __MACOSX/
+
+# Virtual environment
+venv/
+
+# Cache
+__pycache__/
+*.pyc
+
+# Pyenv local version file
+.python-version
+
+# Datasets and outputs
+data/
+360_extra_scenes/
+*.tar
+*.zip
+
+# Training outputs
+checkpoints/
+render/
+
+# COLMAP databases/logs
+database.db
+*.log

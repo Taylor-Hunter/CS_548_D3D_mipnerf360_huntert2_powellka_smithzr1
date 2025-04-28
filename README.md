@@ -68,7 +68,7 @@ python -m train \
 
 ## Rendering Command Example
 Render the trained scene:
-# Example for rendering the trained Truck model
+(Example for rendering the trained Truck model)
 python -m render \
   --gin_configs=configs/360.gin \
   --gin_bindings="Config.data_dir = '${DATA_DIR}'" \

@@ -21,14 +21,14 @@ This repository contains all code modifications, training configurations, and in
 ## Modifications to Original Repository
 
 - **Bug fix**: Corrected an `OverflowError` in `internal/pycolmap/scene_manager.py` by adjusting `INVALID_POINT3D = np.uint64(2**64 - 1)` to avoid assigning `-1` to an unsigned integer.
-- **Dataset adaptation**: Extended usage to new scenes (`treehill`, `flowers`) from the **Dataset pt1.** and **Dataset pt2.** datasets.
+- **Dataset adaptation**: Extended usage to new scenes (Truck) from the **Tanks and Temples** and **Dataset pt1.** datasets.
 - **Environment setup documentation**: Added detailed setup instructions to ensure compatibility with Python 3.9 and specific library versions.
 
 ---
 
 ## Dataset Used
 We used the following scenes from the **Dataset pt1.** dataset:
-- 'bike and bench'
+- `bike and bench`
 
 We tried using the following scenes from the **Dataset pt2.** dataset:
 - `treehill`
@@ -45,40 +45,40 @@ We used **Truck** dataset from (https://www.tanksandtemples.org/download/)
 
 ## Setup Instructions
 1. Clone this repository:
-   git clone https://github.com/Taylor-Hunter/CS_548_D3D_mipnerf360_huntert2_powellka_smithzr1.git
+   `git clone https://github.com/Taylor-Hunter/CS_548_D3D_mipnerf360_huntert2_powellka_smithzr1.git`
 3. Set up a Python 3.9 virtual environment:
-   python3.9 -m venv venv source venv/bin/activate
+   `python3.9 -m venv venv source venv/bin/activate`
 4. Install required packages:
-   pip install -r requirements.txt
-6. Prepare datasets:
-- Place images into:    
+   `pip install -r requirements.txt`
+6. Prepare datasets, place images into:    
   `~/my_dataset_dir/Truck/images/`
 5. Preprocess the datasets with COLMAP:
-  export DATA_DIR=~/my_dataset_dir/Truck
-  bash scripts/local_colmap_and_resize.sh ${DATA_DIR}
+  `export DATA_DIR=~/my_dataset_dir/Truck`
+  `bash scripts/local_colmap_and_resize.sh ${DATA_DIR}`
 
 ## Training Command Example
 Train a scene (example shown for Truck):
-python -m train
---gin_configs=configs/360.gin
---gin_bindings="Config.data_dir = '${DATA_DIR}'"
---gin_bindings="Config.checkpoint_dir = '${DATA_DIR}/checkpoints'"
---gin_bindings="Config.batch_size = 512"
---gin_bindings="Config.max_steps = 10000"
---logtostderr
+python -m train \
+  --gin_configs=configs/360.gin \
+  --gin_bindings="Config.data_dir = '${DATA_DIR}'" \
+  --gin_bindings="Config.checkpoint_dir = '${DATA_DIR}/checkpoints'" \
+  --gin_bindings="Config.batch_size = 512" \
+  --gin_bindings="Config.max_steps = 10000" \
+  --logtostderr
 
 ## Rendering Command Example
 Render the trained scene:
-python -m render
---gin_configs=configs/360.gin
---gin_bindings="Config.data_dir = '${DATA_DIR}'"
---gin_bindings="Config.checkpoint_dir = '${DATA_DIR}/checkpoints'"
---gin_bindings="Config.render_dir = '${DATA_DIR}/render'"
---gin_bindings="Config.render_path = True"
---gin_bindings="Config.render_path_frames = 480"
---gin_bindings="Config.render_video_fps = 60"
---logtostderr
-
+# Example for rendering the trained Truck model
+python -m render \
+  --gin_configs=configs/360.gin \
+  --gin_bindings="Config.data_dir = '${DATA_DIR}'" \
+  --gin_bindings="Config.checkpoint_dir = '${DATA_DIR}/checkpoints'" \
+  --gin_bindings="Config.render_dir = '${DATA_DIR}/render'" \
+  --gin_bindings="Config.render_path = True" \
+  --gin_bindings="Config.render_path_frames = 480" \
+  --gin_bindings="Config.render_video_fps = 60" \
+  --logtostderr
+  
 ## Results
 We successfully trained and rendered the following new scenes:
 - **Bike on Bench Scene:**  
@@ -103,6 +103,22 @@ Due to CPU training and lack of CUDA support, training times were significantly 
 - GitHub Repository (Original Code):  
   [https://github.com/google/mipnerf360](https://github.com/google/mipnerf360)
 
+## Folder Structure
+CS_548_D3D_mipnerf360_huntert2_powellka_smithzr1/
+├── configs/
+├── internal/
+├── my_dataset_dir/
+│   ├── Treehill/
+│   │   ├── images/
+│   │   ├── sparse/
+│   ├── Truck/
+│   │   ├── images/
+│   │   ├── sparse/
+├── scripts/
+├── venv/
+├── README.md
+├── requirements.txt
+└── train.py
 
 # MultiNeRF: A Code Release for Mip-NeRF 360, Ref-NeRF, and RawNeRF
 

@@ -9,7 +9,7 @@ Team Members:
 
 ---
 
-## 📚 Project Overview
+## Project Overview
 
 Our project explores and extends the MultiNeRF360 system for 360-degree scene reconstruction.  
 We focus on training and evaluating the model on new datasets, performing reproducibility experiments, and analyzing performance.
@@ -18,7 +18,7 @@ This repository contains all code modifications, training configurations, and in
 
 ---
 
-## 🛠 Modifications to Original Repository
+## Modifications to Original Repository
 
 - **Bug fix**: Corrected an `OverflowError` in `internal/pycolmap/scene_manager.py` by adjusting `INVALID_POINT3D = np.uint64(2**64 - 1)` to avoid assigning `-1` to an unsigned integer.
 - **Dataset adaptation**: Extended usage to new scenes (`treehill`, `flowers`) from the **Dataset pt1.** and **Dataset pt2.** datasets.
@@ -26,17 +26,82 @@ This repository contains all code modifications, training configurations, and in
 
 ---
 
-## 📂 Dataset Used
+## Dataset Used
 We used the following scenes from the **Dataset pt1.** dataset:
 - 'bike and bench'
 
-We used the following scenes from the **Dataset pt2.** dataset:
+We tried using the following scenes from the **Dataset pt2.** dataset:
 - `treehill`
-- `flowers`
+
+This is the new results we are trying to produce.
+We used **Truck** dataset from (https://www.tanksandtemples.org/download/)
+
+
 
 **Dataset Download Instructions:**
 - Download the Dataset pt1. dataset from (https://jonbarron.info/mipnerf360/)].
-- Download the Dataset pt2. dataset from (https://jonbarron.info/mipnerf360/)].  
+- Download the Dataset pt2. dataset from (https://jonbarron.info/mipnerf360/)].
+- Download Truck dataset from (https://www.tanksandtemples.org/download/)
+
+## Setup Instructions
+1. Clone this repository:
+   git clone https://github.com/Taylor-Hunter/CS_548_D3D_mipnerf360_huntert2_powellka_smithzr1.git
+3. Set up a Python 3.9 virtual environment:
+   python3.9 -m venv venv source venv/bin/activate
+4. Install required packages:
+   pip install -r requirements.txt
+6. Prepare datasets:
+- Place images into:    
+  `~/my_dataset_dir/Truck/images/`
+5. Preprocess the datasets with COLMAP:
+  export DATA_DIR=~/my_dataset_dir/Truck
+  bash scripts/local_colmap_and_resize.sh ${DATA_DIR}
+
+## Training Command Example
+Train a scene (example shown for Truck):
+python -m train
+--gin_configs=configs/360.gin
+--gin_bindings="Config.data_dir = '${DATA_DIR}'"
+--gin_bindings="Config.checkpoint_dir = '${DATA_DIR}/checkpoints'"
+--gin_bindings="Config.batch_size = 512"
+--gin_bindings="Config.max_steps = 10000"
+--logtostderr
+
+## Rendering Command Example
+Render the trained scene:
+python -m render
+--gin_configs=configs/360.gin
+--gin_bindings="Config.data_dir = '${DATA_DIR}'"
+--gin_bindings="Config.checkpoint_dir = '${DATA_DIR}/checkpoints'"
+--gin_bindings="Config.render_dir = '${DATA_DIR}/render'"
+--gin_bindings="Config.render_path = True"
+--gin_bindings="Config.render_path_frames = 480"
+--gin_bindings="Config.render_video_fps = 60"
+--logtostderr
+
+## Results
+We successfully trained and rendered the following new scenes:
+- **Bike on Bench Scene:**  
+  Training with batch size 512, 10,000 iterations on CPU.
+We are in the process of training and rendering the following new scenes:
+- **Truck Scene:**  
+  Training with batch sizes ranging between 16 and 512 based on hardware availability.  
+  Rendered output generated into `/render/` directories.
+
+Due to CPU training and lack of CUDA support, training times were significantly longer compared to GPU-based systems. Best when ran on GPU based systems.
+
+## Known Issues
+- CUDA and GPU acceleration were unavailable in the test environment; fallback to CPU was necessary.
+- Training times were slower than normal (several hours for 10,000 iterations).
+- Adjusted batch size depending on memory capacity (smaller batch sizes for lower RAM).
+
+## References
+- Barron, J. T., Mildenhall, B., Verbin, D., Srinivasan, P. P., & Hedman, P. (2022).  
+  *Mip-NeRF 360: Unbounded anti-aliased neural radiance fields*.  
+  arXiv preprint [arXiv:2111.12077](https://arxiv.org/abs/2111.12077).
+
+- GitHub Repository (Original Code):  
+  [https://github.com/google/mipnerf360](https://github.com/google/mipnerf360)
 
 
 # MultiNeRF: A Code Release for Mip-NeRF 360, Ref-NeRF, and RawNeRF

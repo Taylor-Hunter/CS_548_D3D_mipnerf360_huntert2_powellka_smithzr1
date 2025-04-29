@@ -91,8 +91,8 @@ We successfully trained and rendered the following new scenes:
 Due to CPU training and lack of CUDA support, training times were significantly longer compared to GPU-based systems. Best when ran on GPU based systems.
 
 ## Known Issues
-- CUDA and GPU acceleration were unavailable in the test environment; fallback to CPU was necessary.
-- Training times were slower than normal (several hours for 10,000 iterations).
+- CUDA and GPU acceleration were unavailable in the non-linux test environment; fallback to CPU was necessary.
+- Training times were slower than normal on CPU (several hours for 10,000 iterations).
 - Adjusted batch size depending on memory capacity (smaller batch sizes for lower RAM).
 
 ## References

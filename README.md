@@ -22,7 +22,7 @@ This repository contains all code modifications, training configurations, and in
 
 - **Bug fix**: Corrected an `OverflowError` in `internal/pycolmap/scene_manager.py` by adjusting `INVALID_POINT3D = np.uint64(2**64 - 1)` to avoid assigning `-1` to an unsigned integer.
 - **Error fix**: Imported math package to ref_utils and changed all instances of `np.math.factorial` in ref_utils to `math.factorial` due to an attribute error.
-- **Dataset adaptation**: Extended usage to new scenes (Truck) from the **Tanks and Temples** and **Dataset pt1.** datasets.
+- **Dataset adaptation**: Extended usage to new scenes (Train) from the **Tanks and Temples** and **Dataset pt1.** datasets.
 - **Environment setup documentation**: Added detailed setup instructions to ensure compatibility with Python 3.9 and specific library versions.
 
 ---

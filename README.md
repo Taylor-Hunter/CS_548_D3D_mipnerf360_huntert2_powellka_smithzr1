@@ -29,20 +29,20 @@ This repository contains all code modifications, training configurations, and in
 
 ## Dataset Used
 We used the following scenes from the **Dataset pt1.** dataset:
-- `bike and bench`
+- `bicycle`
 
 We tried using the following scenes from the **Dataset pt2.** dataset:
 - `treehill`
 
 This is the new results we are trying to produce.
-We used **Truck** dataset from (https://www.tanksandtemples.org/download/)
+We used **Train** dataset from (https://www.tanksandtemples.org/download/)
 
 
 
 **Dataset Download Instructions:**
 - Download the Dataset pt1. dataset from (https://jonbarron.info/mipnerf360/)].
 - Download the Dataset pt2. dataset from (https://jonbarron.info/mipnerf360/)].
-- Download Truck dataset from (https://www.tanksandtemples.org/download/)
+- Download Train dataset from (https://www.tanksandtemples.org/download/)
 
 ## Setup Instructions
 1. Clone this repository:
@@ -52,9 +52,9 @@ We used **Truck** dataset from (https://www.tanksandtemples.org/download/)
 4. Install required packages:
    `pip install -r requirements.txt`
 6. Prepare datasets, place images into:    
-  `~/my_dataset_dir/Truck/images/`
+  `~/my_dataset_dir/Train/images/`
 5. Preprocess the datasets with COLMAP:
-  `export DATA_DIR=~/my_dataset_dir/Truck`
+  `export DATA_DIR=~/my_dataset_dir/Train`
   `bash scripts/local_colmap_and_resize.sh ${DATA_DIR}`
 
 ## Training Command Example
@@ -82,11 +82,10 @@ python -m render \
   
 ## Results
 We successfully trained and rendered the following new scenes:
-- **Bike on Bench Scene:**  
-  Training with batch size 512, 10,000 iterations on CPU.
-We are in the process of training and rendering the following new scenes:
-- **Truck Scene:**  
-  Training with batch sizes ranging between 16 and 512 based on hardware availability.  
+- **Bicycle Scene:**  
+  Training with batch size 512, 10,000 iterations on GPU.
+- **Train Scene:**  
+  Training with batch size 256, 10,000 iterations on GPU. 
   Rendered output generated into `/render/` directories.
 
 Due to CPU training and lack of CUDA support, training times were significantly longer compared to GPU-based systems. Best when ran on GPU based systems.

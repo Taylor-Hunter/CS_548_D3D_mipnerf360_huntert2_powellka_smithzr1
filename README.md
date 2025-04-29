@@ -34,8 +34,8 @@ We used the following scenes from the **Dataset pt1.** dataset:
 We tried using the following scenes from the **Dataset pt2.** dataset:
 - `treehill`
 
-This is the new results we are trying to produce.
-We used **Train** dataset from (https://www.tanksandtemples.org/download/)
+This is the scene for the new results we are trying to produce.
+We used `Train` dataset from (https://www.tanksandtemples.org/download/)
 
 
 
